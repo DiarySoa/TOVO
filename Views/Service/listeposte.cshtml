@@ -1,0 +1,9 @@
+@model List<Poste>
+<h1>Service</h1>
+<p>Service
+    <select>
+        @foreach (var poste in Model)
+        {
+            <option>@poste.nom_poste</option>
+        }
+    </select>
