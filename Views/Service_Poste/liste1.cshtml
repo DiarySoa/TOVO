@@ -1,0 +1,60 @@
+@* @model Service_Poste
+<h1>Service</h1>
+<p>Service
+    <select>
+        @for (int i = 0; i < Model.GetAllPoste().Count; i++)
+        {
+            <option>@Model.GetAllPoste()[i]</option>
+        }
+    </select> *@
+
+@* @model List<Service_Poste>
+
+<h1>Service</h1>
+<p>Service
+    <select>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <option>@Model[i].GetAllPoste()</option>
+        }
+    </select>
+</p> *@
+
+@model TOVO.Models.Service_Poste
+
+<h1>
+    <center>Service</center>
+</h1>
+
+<p>Services
+    <select>
+        @foreach (var service in Model.services)
+        {
+            <option>@service.nom_service</option>
+        }
+    </select>
+</p>
+
+<p>Valeur horaire <input type="text" name="heure"></p>
+
+<p>Postes
+    <select>
+        @foreach (var poste in Model.postes)
+        {
+            <option>@poste.nom_poste</option>
+        }
+    </select>
+</p>
+
+<p>Diplome
+    <select>
+        <option value="">CEPE</option>
+        <option value="">BEPC</option>
+        <option value="">BACC</option>
+        <option value="">LICENSE</option>
+        <option value="">MASTER</option>
+    </select>
+</p>
+<input type="submit" value="Enregistrer" name="enregistrer">
+
+
