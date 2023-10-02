@@ -42,5 +42,33 @@ insert into note_diplome values (default, 4, 30, 50, 0,0,0);
 insert into note_diplome values (default, 5, 0,  0, 0, 50, 60);
 insert into note_diplome values (default, 6, 0, 0, 0,60,60);
 
+create table service_poste(
+    id SERIAL PRIMARY KEY,
+    id_service INT,
+    valeur_horaire DOUBLE PRECISION,
+    id_poste INT,
+    diplome VARCHAR(50),
+    FOREIGN KEY (id_poste) REFERENCES poste (id),
+    FOREIGN KEY (id_service) REFERENCES service (id)
+);
 
 
+create table candidat(
+    id SERIAL PRIMARY KEY,
+    nom_candidat VARCHAR(50),
+    prenom_candidat VARCHAR(50),
+    dtn DATE,
+    email VARCHAR(50),
+    sexe VARCHAR(50),
+    telephone VARCHAR(50)
+);
+
+create table candidat_diplome(
+    id SERIAL PRIMARY KEY,
+    id_candidat int,
+    niveau_etude VARCHAR(50),
+    diplome VARCHAR(50),
+    cv VARCHAR(50),
+    lettre_de_motivaiton VARCHAR(50),
+    FOREIGN KEY (id_candidat) REFERENCES candidat (id)
+);

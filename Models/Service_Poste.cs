@@ -1,3 +1,4 @@
+using System.Data;
 using Npgsql;
 
 namespace TOVO.Models
@@ -6,6 +7,18 @@ namespace TOVO.Models
 
         public List<Service> services { get; set; }
         public List<Poste> postes { get; set; }
+
+        public int id { get; set; }
+        public string nom_service { get; set; }
+        public double valeur { get; set; }
+        public string nom_poste { get; set; }
+        public string diplome { get; set; }
+
+        public int personne { get; set; }
+
+
+
+        public double valeur_heure_olona = 8;
 
         public List<Service> GetAllService()
         {
@@ -56,24 +69,144 @@ namespace TOVO.Models
             return postes;
         }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+        public int GetIdService( String nom){
+            int idcf = 0;
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT id FROM Service WHERE nom_service='" + nom + "'";
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
 
-        // public List<String> GetAllDiplome()
-        // {
-        //     List<String> diplomes = new List<String>();
+                        idcf = reader.GetInt32(0);
+                    }
+                }
+            }
+            connection.Close();
+            return idcf;
+        }
 
-        //     using NpgsqlConnection connection = Connect.GetSqlConnection();
-        //     connection.Open();
-        //     string query = "SELECT column_name FROM information_schema.columns WHERE table_name = '{note_diplome}' AND ordinal_position IN (2,3,5, 5, 6)";
-        //     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-        //     {
-        //         using (NpgsqlDataReader reader = command.ExecuteReader())
-        //         {
-        //             Liste<String> s = 
-        //         }
-        //     }
-        //     connection.Close();
-        //     return diplomes;
+        public int GetIdPoste(String nom)
+        {
+
+            int idcf = 0;
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT id FROM poste WHERE nom_poste ='" + nom + "'";
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        idcf = reader.GetInt32(0);
+                    }
+                }
+            }
+            connection.Close();
+            return idcf;
+        }
+
+        public String GetNomService(int id)
+        {
+            String idcf = "";
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT nom_service FROM Service WHERE id=" + id ;
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        idcf = reader.GetString(0);
+                    }
+                }
+            }
+            connection.Close();
+            return idcf;
+        }
+
+        public String GetNomPoste(int id)
+        {
+
+            String idcf = "";
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT nom_poste FROM Poste WHERE id=" + id;
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        idcf = reader.GetString(0);
+                    }
+                }
+            }
+            connection.Close();
+            return idcf;
+
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+
+        public void InsertSP(String nom_service, String nom_poste, double valeur, String diplome)
+        {
+            int id_service = GetIdService(nom_service);
+            int id_poste = GetIdPoste(nom_poste);
+            
+            using (NpgsqlConnection connection = Connect.GetSqlConnection())
+            {
+                connection.Open();
+
+                string query = "INSERT INTO service_poste VALUES( default ," + id_service + "," + valeur + "," + id_poste + ",'" + diplome + "')";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // public double isanolona(double valeur){
+        //     double isa = valeur / this.valeur_heure_olona;
+        //     return isa ;
         // }
+
+        public Service_Poste last(){
+            Service_Poste sp = new Service_Poste();
+
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT * FROM service_poste ORDER BY id DESC limit 1";
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        sp.id= reader.GetInt32(0);
+                        sp.nom_service = GetNomService(reader.GetInt32(1));
+                        sp.nom_poste = GetNomPoste(reader.GetInt32(3));
+                        sp.diplome = reader.GetString(4);
+                        sp.personne = (int) (reader.GetDouble(2)/7);
+
+                    }
+                }
+            }
+            connection.Close();
+
+            return sp;
+        }
 
     }
 }

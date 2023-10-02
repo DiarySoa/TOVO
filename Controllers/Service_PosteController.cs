@@ -5,22 +5,6 @@ namespace TOVO.Controllers;
 
 public class Service_PosteController : Controller
 {
-    // public IActionResult Index()
-    // {
-    //     Service_Poste service = new Service_Poste();
-    //     List<Service> data = service.GetAllService();
-    //     return View("liste1", data);
-    // }
-
-    // public IActionResult avec_poste()
-    // {
-    //     Service_Poste service = new Service_Poste();
-    //     List<Poste> data = service.GetAllPoste();
-    //     return View("liste1", data);
-    // }
-
-
-
     public IActionResult Index()
     {
         Service_Poste servicep = new Service_Poste();
@@ -39,4 +23,21 @@ public class Service_PosteController : Controller
 
         return View("liste1", servicep);
     }
+
+    public IActionResult ValiderListe1(string nom_service, string nom_poste, double heure, string diplome)
+    {
+        Service_Poste servicep = new Service_Poste();
+        servicep.InsertSP(nom_service, nom_poste, heure, diplome);
+        Service_Poste data = servicep.last();
+
+        return View("liste2",data);
+    }
+
+    // public IActionResult ValiderListe1()
+    // {
+    //     Service_Poste servicep = new Service_Poste();
+    //     String data = servicep.GetNomPoste(1);
+
+    //     return View("liste2", data);
+    // }
 }

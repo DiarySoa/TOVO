@@ -1,4 +1,3 @@
-@model TOVO.Models.Service_Poste
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -106,43 +105,18 @@
         background-color: #0056b3;
     }
 </style>
-
 <div>
-<h1>
-    <center>Service</center>
-</h1>
-
-<form method="post" action="@Url.Action("ValiderListe1","Service_Poste")">
-<p>Services
-    <select name="nom_service">
-        @foreach (var service in Model.services)
-        {
-            <option>@service.nom_service</option>
-        }
-    </select>
-</p>
-
-<p>Valeur horaire <input type="text" name="heure"></p>
-
-<p>Postes
-    <select name="nom_poste">
-        @foreach (var poste in Model.postes)
-        {
-            <option>@poste.nom_poste</option>
-        }
-    </select>
-</p>
-
-<p>Diplome
-    <select name="diplome">
-        <option value="CEPE">CEPE</option>
-        <option value="BEPC">BEPC</option>
-        <option value="BACC">BACC</option>
-        <option value="LICENSE">LICENSE</option>
-        <option value="MASTER">MASTER</option>
-    </select>
-</p>
-<button type="submit" value="Valider">valider</button>
-
-</form>
+    <form action="@Url.Action("insertCandidat","Candidat")" method="post" enctype="multipart/form-data">
+        <label for="">Nom</label> <input type="text" name="nom" id="">
+        <label for="">Prenom</label> <input type="text" name="prenom" id="">
+        <label for="">Date de naissance</label> <input type="date" name="dtn" id="">
+        <label for="">Email</label> <input type="text" name="email" id="">
+        <label for="">Sexe</label>
+        <select name="sexe" id="">
+            <option value="Homme">Homme</option>
+            <option value="Femme">Femme</option>
+        </select>
+        <label for="">Tel</label> <input type="text" name="tel" id="">
+        <button type="submit" value="Valider">valider</button>
+    </form>
 </div>
