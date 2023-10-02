@@ -42,13 +42,5 @@ insert into note_diplome values (default, 4, 30, 50, 0,0,0);
 insert into note_diplome values (default, 5, 0,  0, 0, 50, 60);
 insert into note_diplome values (default, 6, 0, 0, 0,60,60);
 
-create table service_poste(
-    id_service INT,
-    valeur_horaire DOUBLE PRECISION,
-    id_poste INT,
-    diplome VARCHAR(50),
-    FOREIGN KEY (id_poste) REFERENCES poste (id),
-    FOREIGN KEY (id_service) REFERENCES service (id)
-);
 
 

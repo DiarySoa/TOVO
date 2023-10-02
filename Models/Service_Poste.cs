@@ -7,8 +7,6 @@ namespace TOVO.Models
         public List<Service> services { get; set; }
         public List<Poste> postes { get; set; }
 
-        public double valeur_heure_olona = 8;
-
         public List<Service> GetAllService()
         {
             List<Service> services = new List<Service>();
@@ -59,85 +57,23 @@ namespace TOVO.Models
         }
 
 
-        public int GetIdService( String nom){
-            int idcf = 0;
-            using NpgsqlConnection connection = Connect.GetSqlConnection();
-            connection.Open();
-            string query = "SELECT id FROM Service WHERE nom_service='" + nom + "'";
-            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-            {
-                using (NpgsqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+        // public List<String> GetAllDiplome()
+        // {
+        //     List<String> diplomes = new List<String>();
 
-                        idcf = reader.GetInt32(0);
-                    }
-                }
-            }
-            connection.Close();
-            return idcf;
-        }
-
-        public int GetIdPoste(String nom)
-        {
-
-            int idcf = 0;
-            using NpgsqlConnection connection = Connect.GetSqlConnection();
-            connection.Open();
-            string query = "SELECT id FROM poste WHERE nom_poste ='" + nom + "'";
-            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-            {
-                using (NpgsqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                        idcf = reader.GetInt32(0);
-                    }
-                }
-            }
-            connection.Close();
-            return idcf;
-        }
-
-
-        public void insertService_Poste(String nom_service, String nom_poste, double valeur, String diplome)
-        {
-            int id_service = GetIdService(nom_service);
-            int id_poste = GetIdPoste(nom_poste);
-
-            using NpgsqlConnection connection = Connect.GetSqlConnection();
-            connection.Open();
-            string query = "INSERT INTO service_poste VALUES(" + id_service + "," + id_poste + "," + valeur + ",'" + diplome+ "')";
-            Console.WriteLine(query);
-            NpgsqlCommand command = new NpgsqlCommand(query, connection);
-            int s = command.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        public void InsertSP(String nom_service, String nom_poste, double valeur, String diplome)
-        {
-            int id_service = GetIdService(nom_service);
-            int id_poste = GetIdPoste(nom_poste);
-            
-            using (NpgsqlConnection connection = Connect.GetSqlConnection())
-            {
-                connection.Open();
-
-                string query = "INSERT INTO service_poste VALUES(" + id_service + "," + valeur + "," + id_poste + ",'" + diplome + "')";
-
-                using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public double isanolona(double valeur){
-            double isa = valeur / this.valeur_heure_olona;
-            return isa ;
-        }
+        //     using NpgsqlConnection connection = Connect.GetSqlConnection();
+        //     connection.Open();
+        //     string query = "SELECT column_name FROM information_schema.columns WHERE table_name = '{note_diplome}' AND ordinal_position IN (2,3,5, 5, 6)";
+        //     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        //     {
+        //         using (NpgsqlDataReader reader = command.ExecuteReader())
+        //         {
+        //             Liste<String> s = 
+        //         }
+        //     }
+        //     connection.Close();
+        //     return diplomes;
+        // }
 
     }
 }

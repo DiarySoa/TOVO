@@ -39,27 +39,4 @@ public class Service_PosteController : Controller
 
         return View("liste1", servicep);
     }
-
-    public IActionResult ValiderListe1(string nom_service, string nom_poste, double heure, string diplome)
-    {
-        Service_Poste servicep = new Service_Poste();
-        servicep.InsertSP(nom_service, nom_poste, heure, diplome);
-
-        return RedirectToAction("liste1");
-    }
-
-    // public IActionResult ValiderListe1(string nom_service)
-    // {
-    //     Service_Poste servicep = new Service_Poste();
-    //     int data = servicep.GetIdService(nom_service);
-
-    //     return View("liste2", data);
-    // }
-
-    // public IActionResult Lister(string nom_service)
-    // {
-    //     Service_Poste servicep = new Service_Poste();
-    //     int data = servicep.GetIdService(nom_service);
-    //     return View("liste2", data);
-    // }
 }
