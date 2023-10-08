@@ -44,3 +44,13 @@ insert into note_diplome values (default, 6, 0, 0, 0,60,60);
 
 
 
+create table question(
+    id serial PRIMARY KEY,
+    valeur VARCHAR(100)
+);
+
+create table reponses(
+    id serial PRIMARY KEY,
+    valeur VARCHAR(100),
+    id_question REFERENCES question (id)
+);
