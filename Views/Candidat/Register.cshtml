@@ -107,6 +107,7 @@
 </style>
 <div>
     <form action="@Url.Action("insertCandidat","Candidat")" method="post" enctype="multipart/form-data">
+        <input type="text" name="n" value="@ViewBag.Id_annonce">
         <label for="">Nom</label> <input type="text" name="nom" id="">
         <label for="">Prenom</label> <input type="text" name="prenom" id="">
         <label for="">Date de naissance</label> <input type="date" name="dtn" id="">
@@ -117,6 +118,23 @@
             <option value="Femme">Femme</option>
         </select>
         <label for="">Tel</label> <input type="text" name="tel" id="">
+        <label for="">Situation</label>
+        <select name="situation" id="">
+            <option value="Celibataire">Celibataire</option>
+            <option value="Marie">Marie</option>
+            <option value="Compliquer">Compliquer</option>
+        </select>
+        <label for="">Adresse</label> <input type="text" name="adresse" id="">
+        <label for="">Region</label> <input type="text" name="region" id="">
+        <label for="">Province</label>
+        <select name="province" id="">
+            <option value="Antananarivo">Antananarivo</option>
+            <option value="Toamasina">Toamasina</option>
+            <option value="Mahajanga">Mahajanga</option>
+            <option value="Toliara">Toliara</option>
+            <option value="Antsiranana">Antsiranana</option>
+            <option value="Fianarantsoa">Fianarantsoa</option>
+        </select>
         <button type="submit" value="Valider">valider</button>
     </form>
 </div>

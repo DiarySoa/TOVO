@@ -7,58 +7,23 @@ namespace TOVO.Controllers;
 
 public class CandidatController : Controller
 {
-    public IActionResult Index()
+    public IActionResult Index(String id_annonce)
     {
+        ViewBag.Id_annonce = id_annonce;
         return View("Register");
     }
 
-    public IActionResult insertCandidat(String nom, String prenom, DateTime dtn, String email, String sexe, String tel)
+    public IActionResult insertCandidat(String nom, String prenom, DateTime dtn, String email, String sexe, String tel, String situation, String adresse, String region, String province)
     {
         Candidat ca = new Candidat();
-        ca.Insert_Candidat(nom,prenom,dtn,email,sexe,tel);
+        ca.Insert_Candidat(nom,prenom,dtn,email,sexe,tel,situation,adresse,region,province);
         int data = ca.id_last_register();
         return View("Import",data);
     }
-
-    // public IActionResult insertCandidat_diplome(String niveau, String diplome, String cv, String lm)
-    // {
-    //     Candidat ca = new Candidat();
-    //     ca.Insert_Candidat_diplome(niveau,diplome,cv,lm);
-
-    //     if (diplome != null && cv != null && lm != null)
-    //     {
-    //         // Assurez-vous que les fichiers ont été correctement sélectionnés
-    //         // Ensuite, vous pouvez enregistrer ces fichiers où vous le souhaitez.
-    //         // Par exemple, vous pouvez utiliser Server.MapPath pour obtenir un chemin sur le serveur.
-
-    //         string diplomePath = Server.MapPath("~/Uploads/" + diplome.FileName);
-    //         string cvPath = Server.MapPath("~/Uploads/" + cv.FileName);
-    //         string lmPath = Server.MapPath("~/Uploads/" + lm.FileName);
-
-    //         // Sauvegardez les fichiers sur le serveur
-    //         diplome.SaveAs(diplomePath);
-    //         cv.SaveAs(cvPath);
-    //         lm.SaveAs(lmPath);
-
-    //         // Après avoir sauvegardé les fichiers, vous pouvez effectuer d'autres opérations
-    //         // telles que l'ajout des informations dans une base de données.
-
-    //         // Redirigez l'utilisateur vers une page de confirmation ou une autre page.
-    //         return RedirectToAction("Confirmation");
-    //     }
-    //     else
-    //     {
-    //         // Gérez le cas où les fichiers n'ont pas été correctement sélectionnés
-    //         return View("Erreur");
-    //     }
-    //     return View("Import");
-    // }
-
-
-    public IActionResult insertCandidat_diplome(String niveau, IFormFile diplome, IFormFile cv, IFormFile lm)
+    public IActionResult insertCandidat_diplome(String niveau, IFormFile diplome, IFormFile cv, IFormFile lm, int experience)
     {
         Candidat ca = new Candidat();
-        ca.Insert_Candidat_diplome(niveau, diplome.FileName, cv.FileName, lm.FileName);
+        ca.Insert_Candidat_diplome(niveau, diplome.FileName, cv.FileName, lm.FileName,experience);
 
         if (diplome != null && diplome.Length > 0)
         {
@@ -91,5 +56,7 @@ public class CandidatController : Controller
             // Aucun fichier sélectionné
             return View("Erreur");
         }
+
+        return View();
     }
 }

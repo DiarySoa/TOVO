@@ -7,13 +7,15 @@ namespace TOVO.Models
 
         public List<Service> services { get; set; }
         public List<Poste> postes { get; set; }
-
         public int id { get; set; }
         public string nom_service { get; set; }
         public double valeur { get; set; }
         public string nom_poste { get; set; }
         public string diplome { get; set; }
-
+        public string sexe { get; set; }
+        public string age_d { get; set; }
+        public string age_f { get; set; }
+        public string lieu { get; set; }
         public int personne { get; set; }
 
 
@@ -44,24 +46,20 @@ namespace TOVO.Models
             return services;
         }
 
-        public List<Poste> GetAllPoste()
+        public List<String> GetAllPoste(String nom_service)
         {
-            List<Poste> postes = new List<Poste>();
+            List<String> postes = new List<String>();
 
             using NpgsqlConnection connection = Connect.GetSqlConnection();
             connection.Open();
-            string query = "SELECT * FROM Poste";
+            string query = "SELECT nom_poste FROM ser_pos where nom_service = '" + nom_service + "'";
             using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
             {
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Poste post = new Poste();
-                        post.id = reader.GetInt32(0);
-                        post.nom_poste = reader.GetString(1);
-                        post.id_serv = reader.GetInt32(2);
-                        postes.Add(post);
+                        postes.Add(reader.GetString(0));
                     }
                 }
             }
@@ -69,7 +67,9 @@ namespace TOVO.Models
             return postes;
         }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         public int GetIdService( String nom){
             int idcf = 0;
             using NpgsqlConnection connection = Connect.GetSqlConnection();
@@ -158,7 +158,7 @@ namespace TOVO.Models
 
         ////////////////////////////////////////////////////////////////////////////////////////
 
-        public void InsertSP(String nom_service, String nom_poste, double valeur, String diplome)
+        public void InsertSP(String nom_service, String nom_poste, double valeur, String diplome, String sexe, String age_d, String age_f, String lieu)
         {
             int id_service = GetIdService(nom_service);
             int id_poste = GetIdPoste(nom_poste);
@@ -167,7 +167,7 @@ namespace TOVO.Models
             {
                 connection.Open();
 
-                string query = "INSERT INTO service_poste VALUES( default ," + id_service + "," + valeur + "," + id_poste + ",'" + diplome + "')";
+                string query = "INSERT INTO service_poste VALUES( default ," + id_service + "," + valeur + "," + id_poste + ",'" + diplome +"','"+ sexe+"','"+age_d+"','"+age_f+"','"+lieu +"')";
 
                 using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                 {
@@ -208,5 +208,49 @@ namespace TOVO.Models
             return sp;
         }
 
-    }
+        public List<Service_Poste> getAllServicePoste()
+        {
+            List<Service_Poste> serp = new List<Service_Poste>();
+
+            using NpgsqlConnection connection = Connect.GetSqlConnection();
+            connection.Open();
+            string query = "SELECT * FROM service_poste";
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Service_Poste sp = new Service_Poste();
+                        sp.id = reader.GetInt32(0);
+                        sp.nom_service = GetNomService(reader.GetInt32(1));
+                        sp.nom_poste = GetNomPoste(reader.GetInt32(3));
+                        sp.diplome = reader.GetString(4);
+                        sp.sexe = reader.GetString(5);
+                        sp.age_d = reader.GetString(6);
+                        sp.age_f = reader.GetString(7);
+                        // sp.lieu = reader.GetString(8);
+                        if (!reader.IsDBNull(8))
+                        {
+                            sp.lieu = reader.GetString(8);
+                        }
+                        else
+                        {
+                            // Gérez le cas où la colonne "lieu" est NULL
+                            sp.lieu = null; // Ou toute autre valeur par défaut que vous souhaitez
+                        }
+                        // sp.personne = (int)(reader.GetDouble(2) / 7);
+                        serp.Add(sp);
+
+                    }
+                }
+            }
+            connection.Close();
+
+            return serp;
+        }
+
+        
+
+        }
 }

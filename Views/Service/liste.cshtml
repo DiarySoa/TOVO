@@ -1,9 +1,119 @@
 @model List<Service>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    div {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    select,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="file"] {
+        cursor: pointer;
+    }
+
+    select:hover,
+    input[type="file"]:hover {
+        border-color: #333;
+    }
+
+    select:focus,
+    input[type="file"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    @*////////////////////////////////////////////*@select,
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"] {
+        cursor: pointer;
+    }
+
+    select:hover,
+    input[type="text"]:hover {
+        border-color: #333;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    @*//////////////////////////////////////////////////////////*@input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="date"] {
+        cursor: pointer;
+    }
+
+    select:hover,
+    input[type="date"]:hover {
+        border-color: #333;
+    }
+
+    select:focus,
+    input[type="date"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    /* Style the submit button if you have one */
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
 <h1>Service</h1>
-<p>Service
-    <select>
+<form method="post" action="@Url.Action("renvoie","Service")">
+<label>Service</label>
+    <select name="nom">
         @foreach (var service in Model){
             <option>@service.nom_service</option>
         }
     </select>
+    <button type="submit" value="Valider">valider</button>
+</form>
 
