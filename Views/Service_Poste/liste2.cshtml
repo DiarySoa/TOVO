@@ -1,4 +1,51 @@
-@model int
-<h1>Service</h1>
-<p>Service: @Model  </p>
+@model List<Service_Poste>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+    }
+    div {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    /* Style the submit button if you have one */
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+@foreach (var servicep in Model){
+    <div>
+        <h1>Annonce</h1>
+            <form method="post" action="@Url.Action("vers_liste_candidat","Service_Poste")">
+                <input type="hidden" name="id_annonce" value="@servicep.id">
+                    <p>Vous &ecirc;tes passion&eacute;s, talentueux et ambitieux ?</p>
+                    <p>Vous travaillez dans le domaine de @servicep.nom_service ? </p>
+                    <p>Nous cherchons un : @servicep.nom_poste avec les competences suivants: </p>
+                    <p>- qui a un @servicep.diplome</p>
+                    <p>- @servicep.sexe </p>
+                    <p>- age de @servicep.age_d a @servicep.age_f ans </p>
+                    <p>- habitant aux alentours de @servicep.lieu </p>
+                <button type="submit" value="Valider">Les Candidats</button>
+            </form>
+    </div><br>
+}
 
