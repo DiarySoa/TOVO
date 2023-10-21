@@ -2,96 +2,23 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
     }
-
     div {
-        margin: 20px;
+        max-width: 600px;
+        margin: 0 auto;
         padding: 20px;
-        border: 1px solid #ccc;
+        background-color: #fff;
         border-radius: 5px;
-        background-color: #f9f9f9;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     }
-
     label {
         display: block;
         margin-bottom: 10px;
         font-weight: bold;
     }
-
-    select,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="file"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="file"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="file"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    @*////////////////////////////////////////////*@select,
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="text"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="text"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    @*//////////////////////////////////////////////////////////*@input[type="date"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="date"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="date"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="date"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
     /* Style the submit button if you have one */
     button[type="submit"] {
         background-color: #007bff;
@@ -101,26 +28,24 @@
         border-radius: 4px;
         cursor: pointer;
     }
-
     button[type="submit"]:hover {
         background-color: #0056b3;
     }
 </style>
 @foreach (var servicep in Model){
     <div>
-    <h1>Annonce</h1>
-    <form method="post" action="@Url.Action("vers_candidat","Service_Poste")">
-        <input type="hidden" name="id_annonce" value="@servicep.id">
-        <p>Vous etes passione, talentueux et ambitieux ?</p>
-        <p>Vous travaillez dans le donmaine de @servicep.nom_service ? </p>
-        <p>Nous cherchons un : @servicep.nom_poste avec les competences suivants: </p>
-        <p>- qui a un @servicep.diplome</p>
-        <p>- @servicep.sexe </p>
-        <p>- age de @servicep.age_d a @servicep.age_f ans </p>
-        <p>- habitant aux alentours de @servicep.lieu </p>
-        <button type="submit" value="Valider">valider</button>
-
-    </form>
-    </div>
+        <h1>Annonce</h1>
+            <form method="post" action="@Url.Action("vers_liste_candidat","Service_Poste")">
+                <input type="hidden" name="id_annonce" value="@servicep.id">
+                    <p>Vous &ecirc;tes passion&eacute;s, talentueux et ambitieux ?</p>
+                    <p>Vous travaillez dans le domaine de @servicep.nom_service ? </p>
+                    <p>Nous cherchons un : @servicep.nom_poste avec les competences suivants: </p>
+                    <p>- qui a un @servicep.diplome</p>
+                    <p>- @servicep.sexe </p>
+                    <p>- age de @servicep.age_d a @servicep.age_f ans </p>
+                    <p>- habitant aux alentours de @servicep.lieu </p>
+                <button type="submit" value="Valider">Les Candidats</button>
+            </form>
+    </div><br>
 }
 

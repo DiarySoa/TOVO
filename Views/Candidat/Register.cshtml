@@ -1,140 +1,125 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
     }
-
-    div {
-        margin: 20px;
+    form {
+        margin-top: 200px;
+        padding-top: 100px;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    #inputForm {
+        max-width: 600px;
+        margin: 0 auto;
         padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #inputQuestion {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    select,
+    input[type="file"],
+    input[type="date"],
+    input[type="text"] {
+        padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        background-color: #f9f9f9;
+        font-size: 16px;
+        transition: border-color 0.3s ease-in-out;
     }
-
+    select:focus,
+    input[type="file"]:focus,
+    input[type="date"]:focus,
+    input[type="text"]:focus {
+        border-color: #007BFF;
+    }
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
     label {
         display: block;
         margin-bottom: 10px;
         font-weight: bold;
     }
-
-    select,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="file"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="file"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="file"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    @* //////////////////////////////////////////// *@select,
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="text"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="text"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-    @* ////////////////////////////////////////////////////////// *@
-    input[type="date"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="date"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="date"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="date"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    /* Style the submit button if you have one */
-    button[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
 </style>
+<br><br><br>
 <div>
-    <form action="@Url.Action("insertCandidat","Candidat")" method="post" enctype="multipart/form-data">
-        <input type="text" name="n" value="@ViewBag.Id_annonce">
-        <label for="">Nom</label> <input type="text" name="nom" id="">
-        <label for="">Prenom</label> <input type="text" name="prenom" id="">
-        <label for="">Date de naissance</label> <input type="date" name="dtn" id="">
-        <label for="">Email</label> <input type="text" name="email" id="">
+    <form id="inputForm" action="@Url.Action("insertCandidat","Candidat")" method="post" enctype="multipart/form-data">
+    <h1>Candidature </h1>
+        <div id="inputQuestion">
+            <input type="hidden" name="n" value="@ViewBag.Id_annonce">
+        </div><br>
+        <label for="">Nom</label>
+            <div id="inputQuestion">
+                <input type="text" name="nom" id="">
+            </div><br>
+        <label for="">Prenom</label>
+            <div id="inputQuestion">
+                <input type="text" name="prenom" id="">
+            </div><br>
+        <label for="">Date de naissance</label> 
+            <div id="inputQuestion">
+                <input type="date" name="dtn" id="">
+            </div><br>
+        <label for="">Email</label> 
+            <div id="inputQuestion">
+                <input type="text" name="email" id="">
+            </div><br>
         <label for="">Sexe</label>
-        <select name="sexe" id="">
-            <option value="Homme">Homme</option>
-            <option value="Femme">Femme</option>
-        </select>
-        <label for="">Tel</label> <input type="text" name="tel" id="">
+            <div id="inputQuestion">
+                <select name="sexe" id="">
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                </select>
+            </div><br>
+        <label for="">Tel</label>
+            <div id="inputQuestion">
+                <input type="text" name="tel" id="">
+            </div><br>
         <label for="">Situation</label>
-        <select name="situation" id="">
-            <option value="Celibataire">Celibataire</option>
-            <option value="Marie">Marie</option>
-            <option value="Compliquer">Compliquer</option>
-        </select>
-        <label for="">Adresse</label> <input type="text" name="adresse" id="">
-        <label for="">Region</label> <input type="text" name="region" id="">
+            <div id="inputQuestion">
+                <select name="situation" id="">
+                    <option value="Celibataire">Celibataire</option>
+                    <option value="Marie">Marie</option>
+                    <option value="Compliquer">Compliquer</option>
+                </select>
+            </div><br>
+        <label for="">Adresse</label>
+            <div id="inputQuestion">
+                <input type="text" name="adresse" id="">
+            </div><br>
+        <label for="">Region</label> 
+            <div id="inputQuestion">
+                <input type="text" name="region" id="">
+            </div><br>
         <label for="">Province</label>
-        <select name="province" id="">
-            <option value="Antananarivo">Antananarivo</option>
-            <option value="Toamasina">Toamasina</option>
-            <option value="Mahajanga">Mahajanga</option>
-            <option value="Toliara">Toliara</option>
-            <option value="Antsiranana">Antsiranana</option>
-            <option value="Fianarantsoa">Fianarantsoa</option>
-        </select>
+            <div id="inputQuestion">
+                <select name="province" id="">
+                    <option value="Antananarivo">Antananarivo</option>
+                    <option value="Toamasina">Toamasina</option>
+                    <option value="Mahajanga">Mahajanga</option>
+                    <option value="Toliara">Toliara</option>
+                    <option value="Antsiranana">Antsiranana</option>
+                    <option value="Fianarantsoa">Fianarantsoa</option>
+                </select>
+            </div><br>
         <button type="submit" value="Valider">valider</button>
-    </form>
+    </form><br><br><br>
 </div>

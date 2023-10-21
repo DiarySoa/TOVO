@@ -16,6 +16,8 @@ public class Candidat
     public string adresse { get; set; }
     public string region { get; set; }
     public string province { get; set; }
+    public Service_Poste service_poste { get; set; }
+
 
 
     public Candidat(){}
@@ -115,5 +117,73 @@ public class Candidat
         }
 
         return ages;
+    }
+
+    public int lastId()
+    {
+        int s = 0;
+
+        using NpgsqlConnection connection = Connect.GetSqlConnection();
+        connection.Open();
+        string query = "SELECT * FROM candidat_diplome ORDER BY id DESC limit 1";
+        using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        {
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    s = reader.GetInt32(0);
+                }
+            }
+        }
+        connection.Close();
+
+        return s;
+    }
+
+    public void insertcand_poste(int id_candiplome, int idposte)
+    {
+        id_candiplome = lastId();
+
+        using (NpgsqlConnection connection = Connect.GetSqlConnection())
+        {
+            connection.Open();
+
+            string query = "INSERT INTO candidat_poste VALUES(" + id_candiplome + "," + idposte + ")";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    public List<Candidat> getAllCandidatSelectionne(int id_serP)
+    {
+        List<Candidat> serp = new List<Candidat>();
+
+        using NpgsqlConnection connection = Connect.GetSqlConnection();
+        connection.Open();
+        // string query = "SELECT * FROM candidat_et_diplome WHERE diplome = (SELECT diplome FROM service_poste WHERE id = "+ id_serP + ") AND sexe = (SELECT sexe FROM service_poste WHERE id = " + id_serP + ") AND dtn >= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_f FROM service_poste WHERE id = " + id_serP + ")) AND dtn <= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_d FROM service_poste WHERE id = "+ id_serP + "))AND lieu = (SELECT lieu FROM service_poste WHERE id = " + id_serP + ")";
+        string query = "SELECT c.nom_candidat,c.prenom_candidat,c.dtn,c.email,c.sexe,c.telephone,c.situation,c.adresse,c.region,c.province FROM candidat c JOIN candidat_diplome cd ON cd.id_candidat = c.id JOIN candidat_poste cp ON cp.id_cand_dip = cd.id WHERE cd.niveau_etude = (SELECT diplome FROM service_poste WHERE id ="+id_serP+") AND c.sexe = (SELECT sexe FROM service_poste WHERE id ="+id_serP+") AND(DATE_PART('year', CURRENT_DATE) - DATE_PART('year', c.dtn)) >= CAST((SELECT age_d FROM service_poste WHERE id ="+id_serP+") AS INTEGER) AND(DATE_PART('year', CURRENT_DATE) - DATE_PART('year', c.dtn)) <= CAST((SELECT age_f FROM service_poste WHERE id ="+id_serP +") AS INTEGER)AND c.province = (SELECT lieu FROM service_poste WHERE id ="+id_serP+ " limit (SELECT CAST((valeur_horaire/7)*3  as INTEGER) FROM service_poste WHERE id = " + id_serP + "))";
+
+        using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        {
+            using (NpgsqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                   Candidat c= new Candidat();
+                   c.nom = reader.GetString(0);
+                   c.prenom= reader.GetString(1);
+                   c.email = reader.GetString(3);
+                   c.telephone = reader.GetString(5);
+                   serp.Add(c);
+                }
+            }
+        }
+        connection.Close();
+
+        return serp;
     }
 }

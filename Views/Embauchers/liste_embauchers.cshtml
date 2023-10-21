@@ -1,4 +1,4 @@
-@model List<Service>
+@model List<Embauchers>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -28,7 +28,8 @@
         gap: 10px;
     }
     select,
-    input[type="number"],
+    input[type="file"],
+    input[type="date"],
     input[type="text"] {
         padding: 10px;
         border: 1px solid #ccc;
@@ -37,7 +38,8 @@
         transition: border-color 0.3s ease-in-out;
     }
     select:focus,
-    input[type="number"]:focus,
+    input[type="file"]:focus,
+    input[type="date"]:focus,
     input[type="text"]:focus {
         border-color: #007BFF;
     }
@@ -58,19 +60,31 @@
         font-weight: bold;
     }
 </style>
-<br>
-<br>
-<form id="inputForm" method="post" action="@Url.Action("renvoie","Service")">
-    <h1>Service</h1>
-        <label>Service</label>
-        <div id="inputQuestion">
-            <select name="nom">
-                @foreach (var service in Model){
-                    <option>@service.nom_service</option>
-                }
-            </select>
-        </div>
-        <br>
-    <button type="submit" value="Valider">valider</button>
-</form>
+<div>
+<center>
+    <h1>Liste des candidats</h1>
+        <table class="table" border="2px" style="border-collapse: collapse; text-align: center;">
+            <tr>
+                <th style="width: 200px;">Nom</th>
+                <th style="width: 200px;">Prenom</th>
+                <th style="width: 200px;">Date de naissance</th>
+                <th style="width: 200px;">Genre</th>
+                <th style="width: 200px;">Date d'embauche</th>
+                <th style="width: 200px;">Numero Cnaps</th>
+
+            </tr>
+            @foreach (var embauchers in Model){
+            <tr>
+                <td>@embauchers.nom</td>
+                <td>@embauchers.prenom</td>
+                <td>@embauchers.date_de_naissance</td>
+                <td>@embauchers.genre</td>
+                <td>@embauchers.date_embauche</td>
+                <td>@embauchers.numero_cnaps</td>
+            </tr>
+            }
+           
+        </table>
+</center>
+    </div>
 

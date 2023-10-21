@@ -2,158 +2,118 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
     }
-
-    div {
-        margin: 20px;
+    form {
+        margin-top: 200px;
+        padding-top: 100px;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 20px;
+    }
+    #inputForm {
+        max-width: 600px;
+        margin: 0 auto;
         padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    #inputQuestion {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    select,
+    input[type="file"],
+    input[type="date"],
+    input[type="text"] {
+        padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        background-color: #f9f9f9;
+        font-size: 16px;
+        transition: border-color 0.3s ease-in-out;
     }
-
+    select:focus,
+    input[type="file"]:focus,
+    input[type="date"]:focus,
+    input[type="text"]:focus {
+        border-color: #007BFF;
+    }
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
     label {
         display: block;
         margin-bottom: 10px;
         font-weight: bold;
     }
-
-    select,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="file"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="file"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="file"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    @* //////////////////////////////////////////// *@select,
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="text"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="text"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="text"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-    @* ////////////////////////////////////////////////////////// *@
-    input[type="date"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type="date"] {
-        cursor: pointer;
-    }
-
-    select:hover,
-    input[type="date"]:hover {
-        border-color: #333;
-    }
-
-    select:focus,
-    input[type="date"]:focus {
-        outline: none;
-        border-color: #007bff;
-    }
-
-    /* Style the submit button if you have one */
-    button[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
 </style>
 
 <div>
-<h1>
-    <center>Besoins</center>
-</h1>
-
-<form method="post" action="@Url.Action("ValiderListe1","Service_Poste")">
-        <input type="hidden" name="nom_service" value="@ViewBag.Nom">
-<p>Valeur horaire <input type="text" name="heure"></p>
-
-<p>Postes
-    <select name="nom_poste">
-        @foreach (var nom in Model)
-        {
-        <option>@nom</option>
-        }
-    </select>
-</p>
-
-<p>Diplome
-    <select name="diplome">
-        <option value="CEPE">CEPE</option>
-        <option value="BEPC">BEPC</option>
-        <option value="BACC">BACC</option>
-        <option value="LICENSE">LICENSE</option>
-        <option value="MASTER">MASTER</option>
-    </select>
-</p>
-<p>Sexe 
-    <select name="sexe">
-        <option value="Homme">Homme</option>
-        <option value="Femme">Femme</option>
-        <option value="Homme/Femme">Homme/Femme</option>
-    </select>
-</p>
-    <p>Age entre <input type="text" name="d_debut" style="width: 50px;"> et <input type=" text" name="d_fin"
-                style="width: 50px;"></p>
-<p>Lieu 
-    <select name="lieu">
-        <option value="Antananarivo">Antananarivo</option>
-        <option value="Toamasina">Toamasina</option>
-        <option value="Mahajanga">Mahajanga</option>
-        <option value="Toliara">Toliara</option>
-        <option value="Antsiranana">Antsiranana</option>
-        <option value="Fianarantsoa">Fianarantsoa</option>
-    </select>
-</p>
-<button type="submit" value="Valider">valider</button>
-
-</form>
+    <h1> Besoins </h1>
+        <form id="inputForm" method="post" action="@Url.Action("ValiderListe1","Service_Poste")">
+            <input type="hidden" name="nom_service" value="@ViewBag.Nom">
+        <label for="">Valeur horaire</label>
+            <div id="inputQuestion">
+                <input type="text" name="heure">
+            </div><br>
+        <label for="">Postes</label>
+            <div id="inputQuestion">
+                <select name="nom_poste">
+                    @foreach (var nom in Model)
+                    {
+                    <option>@nom</option>
+                    }
+                </select>
+            </div><br>
+        <label for="">Diplome</label>
+            <div id="inputQuestion">
+                <select name="diplome">
+                    <option value="CEPE">CEPE</option>
+                    <option value="BEPC">BEPC</option>
+                    <option value="BACC">BACC</option>
+                    <option value="LICENSE">LICENSE</option>
+                    <option value="MASTER">MASTER</option>
+                </select>
+            </div><br>
+        <label for="">Sexe</label>
+            <div id="inputQuestion">
+                <select name="sexe">
+                    <option value="Homme">Homme</option>
+                    <option value="Femme">Femme</option>
+                    <option value="Homme/Femme">Homme/Femme</option>
+                </select>
+            </div><br>
+        <label for="">Age entre</label>
+            <div id="inputQuestion">
+                <p>
+                    <input type="text" name="d_debut" style="width: 50px;"> et 
+                    <input type="text" name="d_fin" style="width: 50px;">
+                </p>
+            </div><br>
+        <label for="">Lieu</label>
+            <div id="inputQuestion">
+                <select name="lieu">
+                    <option value="Antananarivo">Antananarivo</option>
+                    <option value="Toamasina">Toamasina</option>
+                    <option value="Mahajanga">Mahajanga</option>
+                    <option value="Toliara">Toliara</option>
+                    <option value="Antsiranana">Antsiranana</option>
+                    <option value="Fianarantsoa">Fianarantsoa</option>
+                </select>
+            </div><br>
+        <button type="submit" value="Valider">valider</button>
+    </form>
 </div>

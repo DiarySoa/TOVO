@@ -166,7 +166,7 @@ create table candidat_poste(
     id_cand_dip int,
     id_serv_pos int,
     FOREIGN KEY (id_cand_dip) REFERENCES candidat_diplome (id),
-    FOREIGN KEY (id_serv_pos) REFERENCES candidat (id)
+    FOREIGN KEY (id_serv_pos) REFERENCES service_poste (id)
 
 );
 
@@ -176,6 +176,97 @@ SELECT nom_poste FROM ser_pos where nom_service = 'securite';
 
 create view candidat_et_diplome as (SELECT c.*, cd.id as id_cd, cd.niveau_etude,cd.diplome, cd.cv, cd.lettre_de_motivaiton, cd.experience from candidat_diplome cd JOIN candidat c ON cd.id_candidat = c.id);
 
+SELECT * FROM candidat_et_diplome WHERE diplome = (SELECT diplome FROM service_poste WHERE id = 13) AND sexe = (SELECT sexe FROM service_poste WHERE id = 13) AND date_de_naissance >= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_f FROM service_poste WHERE id = 13)) AND date_de_naissance <= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_d FROM service_poste WHERE id = 13))AND lieu = (SELECT lieu FROM service_poste WHERE id = 13)
+
+
+
+
+
+
+
+SELECT * 
+FROM candidat_et_diplome 
+WHERE diplome = (SELECT diplome FROM service_poste WHERE id = "+ id_serP + ") 
+AND sexe = (SELECT sexe FROM service_poste WHERE id = " + id_serP + ") 
+AND dtn >= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_f FROM service_poste WHERE id = " + id_serP + ")) 
+AND dtn <= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_d FROM service_poste WHERE id = "+ id_serP + "))
+AND lieu = (SELECT lieu FROM service_poste WHERE id = " + id_serP + ")
+;
+
+SELECT  candidat.nom_candidat ,
+        candidat.prenom_candidat ,
+        candidat.dtn,
+        candidat.email ,
+        candidat.sexe ,
+        candidat.telephone ,
+        candidat.situation ,
+        candidat.adresse ,
+        candidat.region ,
+        candidat.province 
+FROM candidat
+JOIN candidat_diplome
+ON candidat_diplome.id_candidat = candidat.id
+JOIN candidat_poste 
+ON candidat_poste.id_cand_dip = candidat_diplome.id 
+WHERE diplome = (SELECT diplome FROM service_poste WHERE id = 1) 
+AND sexe = (SELECT sexe FROM service_poste WHERE id = 1) 
+AND dtn >= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_f FROM service_poste WHERE id = 1)) 
+AND dtn <= (CURRENT_DATE - INTERVAL '1 year' * (SELECT age_d FROM service_poste WHERE id = 1))
+AND lieu = (SELECT lieu FROM service_poste WHERE id = 1)
+;
+
+
+SELECT
+    c.nom_candidat,
+    c.prenom_candidat,
+    c.dtn,
+    c.email,
+    c.sexe,
+    c.telephone,
+    c.situation,
+    c.adresse,
+    c.region,
+    c.province
+FROM
+    candidat c
+JOIN
+    candidat_diplome cd
+ON
+    cd.id_candidat = c.id
+JOIN
+    candidat_poste cp
+ON
+    cp.id_cand_dip = cd.id
+WHERE
+    cd.niveau_etude = (SELECT diplome FROM service_poste WHERE id = 5)
+    AND c.sexe = (SELECT sexe FROM service_poste WHERE id = 5 )
+    AND (DATE_PART('year', CURRENT_DATE) -  DATE_PART('year', c.dtn)) >= CAST((SELECT age_d FROM service_poste WHERE id = 5) AS INTEGER)
+    AND (DATE_PART('year', CURRENT_DATE) -  DATE_PART('year', c.dtn)) <= CAST((SELECT age_f FROM service_poste WHERE id = 5) AS INTEGER)
+    AND c.province = (SELECT lieu FROM service_poste WHERE id = 5)
+    
+    limit (SELECT CAST((valeur_horaire/7)*3  as INTEGER) FROM service_poste WHERE id = 5);
+    
+
+create table employe(
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    genre VARCHAR(50),
+    date_de_naissance DATE
+);
+
+create table embauche(
+    id SERIAL PRIMARY KEY,
+    id_employe int,
+    poste VARCHAR(50),
+    date_embauche DATE,
+    numero_cnaps VARCHAR(50),
+    FOREIGN KEY(id_employe) REFERENCES employe(id)
+);
+
+SELECT eb.*, emp.nom, emp.prenom, emp.genre, emp.date_de_naissance FROM embauche eb JOIN employe emp ON eb.id_employe = emp.id;
+
+create view employe_embaucher as (SELECT eb.*, emp.nom, emp.prenom, emp.genre, emp.date_de_naissance FROM embauche eb JOIN employe emp ON eb.id_employe = emp.id);
 
 
 

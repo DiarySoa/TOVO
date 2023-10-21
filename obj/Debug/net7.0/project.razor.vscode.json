@@ -24090,6 +24090,21 @@
       "FilePath": "d:\\S5\\TOVO\\Views\\Candidat\\Import.cshtml",
       "TargetPath": "Views\\Candidat\\Import.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\S5\\TOVO\\Views\\Candidat\\accueil.cshtml",
+      "TargetPath": "Views\\Candidat\\accueil.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\S5\\TOVO\\Views\\Candidat\\liste_candidat.cshtml",
+      "TargetPath": "Views\\Candidat\\liste_candidat.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\S5\\TOVO\\Views\\Candidat\\envoie.cshtml",
+      "TargetPath": "Views\\Candidat\\envoie.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }

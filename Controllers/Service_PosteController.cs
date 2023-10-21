@@ -38,6 +38,12 @@ public class Service_PosteController : Controller
 
     public IActionResult vers_candidat(string id_annonce)
     {
-        return RedirectToAction("Index", "Candidat", new { id_annonce });
+        return RedirectToAction("inscription", "Candidat", new { id_annonce });
+    }
+
+    
+    public IActionResult vers_liste_candidat(string id_annonce)
+    {
+        return RedirectToAction("liste_candidat", "Candidat", new { id_annonce });
     }
 }
