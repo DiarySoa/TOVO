@@ -1,4 +1,3 @@
-@model List<String>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -60,52 +59,59 @@
         font-weight: bold;
     }
 </style>
-
+<br><br><br>
 <div>
-    <h1> Besoins </h1>
-        <form id="inputForm" method="post" action="@Url.Action("ValiderListe1","Service_Poste")">
-            <input type="hidden" name="nom_service" value="@ViewBag.Nom">
-        <label for="">Valeur horaire</label>
+    <form id="inputForm" action="@Url.Action("insertCandidat","Candidat")" method="post" enctype="multipart/form-data">
+    <h1>Candidature </h1>
+        <div id="inputQuestion">
+            <input type="hidden" name="n" value="@ViewBag.Id_annonce">
+        </div><br>
+        <label for="">Nom</label>
             <div id="inputQuestion">
-                <input type="text" name="heure">
+                <input type="text" name="nom" id="">
             </div><br>
-        <label for="">Postes</label>
+        <label for="">Prenom</label>
             <div id="inputQuestion">
-                <select name="nom_poste">
-                    @foreach (var nom in Model)
-                    {
-                    <option>@nom</option>
-                    }
-                </select>
+                <input type="text" name="prenom" id="">
             </div><br>
-        <label for="">Diplome</label>
+        <label for="">Date de naissance</label> 
             <div id="inputQuestion">
-                <select name="diplome">
-                    <option value="CEPE">CEPE</option>
-                    <option value="BEPC">BEPC</option>
-                    <option value="BACC">BACC</option>
-                    <option value="LICENSE">LICENSE</option>
-                    <option value="MASTER">MASTER</option>
-                </select>
+                <input type="date" name="dtn" id="">
+            </div><br>
+        <label for="">Email</label> 
+            <div id="inputQuestion">
+                <input type="text" name="email" id="">
             </div><br>
         <label for="">Sexe</label>
             <div id="inputQuestion">
-                <select name="sexe">
+                <select name="sexe" id="">
                     <option value="Homme">Homme</option>
                     <option value="Femme">Femme</option>
-                    <option value="Homme/Femme">Homme/Femme</option>
                 </select>
             </div><br>
-        <label for="">Age entre</label>
+        <label for="">Tel</label>
             <div id="inputQuestion">
-                <p>
-                    <input type="text" name="d_debut" style="width: 50px;"> et 
-                    <input type="text" name="d_fin" style="width: 50px;">
-                </p>
+                <input type="text" name="tel" id="">
             </div><br>
-        <label for="">Lieu</label>
+        <label for="">Situation</label>
             <div id="inputQuestion">
-                <select name="lieu">
+                <select name="situation" id="">
+                    <option value="Celibataire">Celibataire</option>
+                    <option value="Marie">Marie</option>
+                    <option value="Compliquer">Compliquer</option>
+                </select>
+            </div><br>
+        <label for="">Adresse</label>
+            <div id="inputQuestion">
+                <input type="text" name="adresse" id="">
+            </div><br>
+        <label for="">Region</label> 
+            <div id="inputQuestion">
+                <input type="text" name="region" id="">
+            </div><br>
+        <label for="">Province</label>
+            <div id="inputQuestion">
+                <select name="province" id="">
                     <option value="Antananarivo">Antananarivo</option>
                     <option value="Toamasina">Toamasina</option>
                     <option value="Mahajanga">Mahajanga</option>
@@ -115,5 +121,5 @@
                 </select>
             </div><br>
         <button type="submit" value="Valider">valider</button>
-    </form>
+    </form><br><br><br>
 </div>

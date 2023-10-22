@@ -11,29 +11,6 @@ namespace TOVO.Models{
         }
 
         public Service(){}
-
-
-        // public List<String> les_nom_service(){
-            
-        //     List<String> nom_service = new List<String>();
-        //     using NpgsqlConnection connection = Connect.GetSqlConnection();
-        //     connection.Open();
-        //     string query = "SELECT nom_service FROM service";
-        //     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-        //     {
-        //         using (NpgsqlDataReader reader = command.ExecuteReader())
-        //         {
-        //             while (reader.Read())
-        //             {
-
-        //                 nom_service.Add(reader.GetString(1));
-        //             }
-        //         }
-        //     }
-        //     connection.Close();
-        //     return nom_service;
-        // }
-
         public List<Service> GetAllService() {
             List<Service> services = new List<Service>();
 
@@ -57,29 +34,29 @@ namespace TOVO.Models{
             return services;
         }
 
-        public List<Poste> GetAllPoste()
-        {
-            List<Poste> postes = new List<Poste>();
+        // public List<Poste> GetAllPoste(String nom_service)
+        // {
+        //     List<Poste> postes = new List<Poste>();
 
-            using NpgsqlConnection connection = Connect.GetSqlConnection();
-            connection.Open();
-            string query = "SELECT * FROM Poste";
-            using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
-            {
-                using (NpgsqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Poste post = new Poste();
-                        post.id = reader.GetInt32(0);
-                        post.nom_poste = reader.GetString(1);
-                        post.id_serv = reader.GetInt32(2);
-                        postes.Add(post);
-                    }
-                }
-            }
-            connection.Close();
-            return postes;
-        }
+        //     using NpgsqlConnection connection = Connect.GetSqlConnection();
+        //     connection.Open();
+        //     string query = "SELECT * FROM ser_pos where nom_service = '"+ nom_service+"'";
+        //     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
+        //     {
+        //         using (NpgsqlDataReader reader = command.ExecuteReader())
+        //         {
+        //             while (reader.Read())
+        //             {
+        //                 Poste post = new Poste();
+        //                 post.id = reader.GetInt32(0);
+        //                 post.nom_poste = reader.GetString(1);
+        //                 post.id_serv = reader.GetInt32(2);
+        //                 postes.Add(post);
+        //             }
+        //         }
+        //     }
+        //     connection.Close();
+        //     return postes;
+        // }
     }
 }

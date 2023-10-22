@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Génération et Suppression d'Inputs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        
+        form {
+            margin-top: 200px;
+            padding-top: 100px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        #inputForm {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #inputContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        #inputQuestion {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease-in-out;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #007BFF;
+        }
+        
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1></h1><br>
+    <br><br><br>
+    <form id="inputForm">
+        <h1>Génération des questions et les reponses</h1>
+        <div id="inputQuestion"><input type="text" placeholder="Question"></div><br>
+        <div id="inputContainer"></div><br>
+        <button type="button" id="addInput">Ajouter une reponse</button>
+        <button type="button" id="removeInput">Supprimer la Derniere reponse</button>
+        <button type="submit" id="removeInput">Valider</button>
+    </form>
+
+    <script>
+        var inputContainer = document.getElementById("inputContainer");
+        var addInputButton = document.getElementById("addInput");
+        var removeInputButton = document.getElementById("removeInput");
+        var inputCount = 0;
+
+        addInputButton.addEventListener("click", function() {
+            inputCount++;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "response" + inputCount;
+            input.placeholder = "response " + inputCount;
+            inputContainer.appendChild(input);
+            updateRemoveButtonState();
+        });
+
+        removeInputButton.addEventListener("click", function() {
+            var lastInput = inputContainer.lastElementChild;
+            if (lastInput) {
+                inputContainer.removeChild(lastInput);
+                inputCount--;
+                updateRemoveButtonState();
+            }
+        });
+
+        function updateRemoveButtonState() {
+            removeInputButton.disabled = inputCount === 0;
+        }
+    </script>
+</body>
+
+</html>

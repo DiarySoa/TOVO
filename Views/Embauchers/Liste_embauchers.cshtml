@@ -1,0 +1,97 @@
+@model List<Embauchers>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    div {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    select,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="file"] {
+        cursor: pointer;
+    }
+
+    select:hover,
+    input[type="file"]:hover {
+        border-color: #333;
+    }
+
+    select:focus,
+    input[type="file"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    input[type="text"] {
+        cursor: pointer;
+    }
+
+    select:hover,
+    input[type="text"]:hover {
+        border-color: #333;
+    }
+
+    select:focus,
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<table border="1px" style="border-collapse: collapse;">
+    <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Date de naissance</th>
+        <th>Genre</th>
+        <th>Date d'embauche</th>
+        <th>Numero Cnaps</th>
+    </tr>
+
+    @foreach (var embauchers in Model)
+    {
+        <tr>
+            <td>@embauchers.nom</td>
+            <td>@embauchers.prenom</td>
+            <td>@embauchers.date_de_naissance</td>
+            <td>@embauchers.genre</td>
+            <td>@embauchers.date_embauche</td>
+            <td>@embauchers.numero_cnaps</td>
+        </tr>
+    }
+
+</table>
+

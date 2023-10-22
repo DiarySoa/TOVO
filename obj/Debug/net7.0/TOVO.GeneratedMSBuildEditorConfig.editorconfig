@@ -16,6 +16,42 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\S5\TOVO
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/S5/TOVO/Views/Candidat/accueil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcYWNjdWVpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Candidat/envoie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcZW52b2llLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Candidat/Import.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcSW1wb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Candidat/liste_candidat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcbGlzdGVfY2FuZGlkYXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Candidat/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Embauchers/Liste_embauchers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1iYXVjaGVyc1xMaXN0ZV9lbWJhdWNoZXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Employe/accueilemp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZVxhY2N1ZWlsZW1wLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Employe/formulaire_embauche.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZVxmb3JtdWxhaXJlX2VtYmF1Y2hlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Employe/insert_employe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZVxpbnNlcnRfZW1wbG95ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/S5/TOVO/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/S5/TOVO/Views/Service_Poste/liste1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZV9Qb3N0ZVxsaXN0ZTEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/S5/TOVO/Views/Service_Poste/liste2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZV9Qb3N0ZVxsaXN0ZTIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/S5/TOVO/Views/Shared/Error.cshtml]
