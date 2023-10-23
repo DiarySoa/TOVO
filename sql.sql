@@ -260,7 +260,8 @@ create table embauche(
     id_employe int,
     poste VARCHAR(50),
     date_embauche DATE,
-    numero_cnaps VARCHAR(50),
+    numero_employe VARCHAR(50) UNIQUE,
+    saalire DOUBLE PRECISION,
     FOREIGN KEY(id_employe) REFERENCES employe(id)
 );
 
@@ -268,7 +269,23 @@ SELECT eb.*, emp.nom, emp.prenom, emp.genre, emp.date_de_naissance FROM embauche
 
 create view employe_embaucher as (SELECT eb.*, emp.nom, emp.prenom, emp.genre, emp.date_de_naissance FROM embauche eb JOIN employe emp ON eb.id_employe = emp.id);
 
+create table heure_supplementaire(
+    id SERIAL PRIMARY KEY,
+    id_employe int,
+    date_heure_supp DATE,
+    nombre_heure int,
+    FOREIGN KEY(id_employe) REFERENCES employe(id)
+);
 
+insert into heure_supplementaire values (default,1,'2023-10-22', 12);
+
+SELECT eb.numero_employe,eb.saalire, emp.nom, emp.prenom, hs.date_heure_supp, hs.nombre_heure FROM embauche eb JOIN employe emp ON eb.id_employe = emp.id JOIN heure_supplementaire hs ON hs.id_employe = emp.id;
+
+create view hs_emp as (SELECT eb.numero_employe,eb.saalire, emp.nom, emp.prenom, hs.date_heure_supp, hs.nombre_heure FROM embauche eb JOIN employe emp ON eb.id_employe = emp.id JOIN heure_supplementaire hs ON hs.id_employe = emp.id)
+
+SELECT *
+FROM embauche
+WHERE EXTRACT(MONTH FROM date_embauche) = 10;
 
 
 

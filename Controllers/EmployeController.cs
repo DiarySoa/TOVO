@@ -28,13 +28,15 @@ public class EmployeController : Controller
     }
 
     public IActionResult formulaire_embauche(){
-        return View("formulaire_embauche");
+        Fiche f = new Fiche();
+        List<String> poste = f.GetAllPoste();
+        return View("formulaire_embauche", poste);
     }
 
-    public IActionResult embauche(String nom, String prenom, String poste,String numero_cnaps)
+    public IActionResult embauche(String nom, String prenom, String poste,String numero_employe, String salaire)
     {
         Employe emp = new Employe();
-        emp.Insert_embauche(emp.id_emp(nom, prenom), poste , numero_cnaps);
+        emp.Insert_embauche(emp.id_emp(nom, prenom), poste , numero_employe, Double.Parse(salaire));
 
         return View("accueilemp");
     }

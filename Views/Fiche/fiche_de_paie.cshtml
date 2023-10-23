@@ -1,0 +1,236 @@
+@model dynamic
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #B8CBD0;
+    }
+
+    button {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .container {
+        @* max-width: 800px;
+        margin-top: 100px; *@
+        @* margin-left: 400px; *@
+        padding: 20px;
+        background-color: white;
+        box-shadow: 20px -16px grey;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+    .employee-info {
+        margin-top: 20px;
+    }
+
+    .info {
+        float: left;
+    }
+
+    .salaire {
+        float: right;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #000;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+    <form id="inputForm" action="@Url.Action("ExportToPdf","Fiche")" method="post" enctype="multipart/form-data">
+    <div class="container">
+        <div class="header">
+            <h1>Fiche de paie</h1>
+        </div>
+
+        <div class="employee-info">
+            <div class="info">
+                <p>Nom de l'employé: @Model.Anakiray.nom @Model.Anakiray.prenom</p>
+                <p>Numéro d'employé: @Model.Anakiray.numero_employe</p>
+                <p>Fonction : @Model.Anakiray.poste</p>
+                <p>Numero cnaps: 1234</p>
+                <p>Date d'embauche: @Model.Anakiray.date_embauche</p>
+                <p>Anciennete: @Model.Anciennete</p>
+                <p>Période de paie: Octobre 2023</p>
+            </div>
+            <div class="salaire">
+                @{
+                    double salaire_brut = Model.Anakiray.salaire; // Accédez à la propriété du modèle
+                    int jours = 30;
+                    int heure = jours * 24;
+                    double journalier = salaire_brut/jours;
+                    double horaire = salaire_brut/heure;
+                }
+                <p>Salaire de base: @Model.Anakiray.salaire</p>
+                <p>Taux journalier: @journalier</p>
+                <p>Taux horaire : @horaire</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Designation</th>
+                    <th>Nombre</th>
+                    <th>Taux</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Salaire</td>
+                    <td></td>
+                    <td></td>
+                    <td>@Model.Anakiray.salaire</td>
+                </tr>
+                <tr>
+                    <td>Absences deductibles</td>
+                    <td></td>
+                    <td>136,114.00</td>
+                    <td>0.00</td>
+                </tr>
+                <tr>
+                    <td>Prime d'anciennete</td>
+                    <td></td>
+                    <td></td>
+                    <td>00</td>
+                </tr>
+                <tr>
+                    <td>Heure supplementaires majorees de 30%</td>
+                    <td></td>
+                    <td>11111</td>
+                    <td>0.0</td>
+                </tr>
+                <tr>
+                    <td>Heure supplementaires majorees de 40%</td>
+                    <td></td>
+                    <td>11111</td>
+                    <td>00</td>
+                </tr>
+                <tr>
+                    <td>Heure supplementaires majorees de 50%</td>
+                    <td></td>
+                    <td>11111</td>
+                    <td>00</td>
+                </tr>
+                <tr>
+                    <td>Heure supplementaires majorees de 100%</td>
+                    <td></td>
+                    <td>11111</td>
+                    <td>00</td>
+                </tr>
+                <tr>
+                    <td>Droits de conges</td>
+                    <td></td>
+                    <td>11111</td>
+                    <td>00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Salaire brut: @Model.Anakiray.salaire</p>
+        </div>
+
+        <table>
+
+            <tbody>
+                <tr>
+                    <td>Retenue cnaps</td>
+                    <td></td>
+                    <td>@Model.Calcul_cnaps</td>
+
+                </tr>
+                <tr>
+                    <td>Retenue sanitaire</td>
+                    <td></td>
+                    <td>@Model.Calcul_ostie</td>
+
+                </tr>
+                <tr>
+                    <td>Tranche IRSA INF 350 0000</td>
+                    <td>0%</td>
+                    <td>@Model.IRSA_inf_350</td>
+
+                </tr>
+                <tr>
+                    <td>Tranche IRSA I DE 350 0001 a 400 000</td>
+                    <td>5%</td>
+                    <td>@Model.IRSA_btw_350_400</td>
+
+                </tr>
+                <tr>
+                    <td>Tranche IRSA I DE 400 0001 a 500 000</td>
+                    <td>10%</td>
+                    <td>@Model.IRSA_btw_400_500</td>
+
+                </tr>
+                <tr>
+                    <td>Tranche IRSA I DE 500 0001 a 600 000</td>
+                    <td>15%</td>
+                    <td>@Model.IRSA_btw_500_600</td>
+
+                </tr>
+                <tr>
+                    <td>Tranche IRSA SUP 600 000</td>
+                    <td>20%</td>
+                    <td>@Model.IRSA_sup_600</td>
+                </tr>
+                <tr>
+                    <td>Total IRSA</td>
+                    <td></td>
+                    <td>@Model.IRSA</td>
+                </tr>
+                <tr>
+                    <td>Retenue</td>
+                    <td></td>
+                    <td>@Model.retenue</td>
+                </tr>
+            </tbody>
+        </table>
+
+        @* <div class="footer"> *@
+            @* <p>Total Retenues: </p>
+            <p>@Model.baseI</p> *@
+
+        @* </div> *@
+
+        <div class="footer">
+                <p>Net a payer: @Model.net</p>
+        </div>
+        <button>Exporter</button>
+    </div>
+    </form>
+</body>

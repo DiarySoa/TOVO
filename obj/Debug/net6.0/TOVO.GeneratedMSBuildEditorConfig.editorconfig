@@ -1,5 +1,5 @@
 is_global = true
-build_property.TargetFramework = net7.0
+build_property.TargetFramework = net6.0
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
@@ -10,7 +10,7 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TOVO
 build_property.RootNamespace = TOVO
 build_property.ProjectDir = c:\Users\LENOVO\OneDrive\Documents\GitHub\TOVO\
-build_property.RazorLangVersion = 7.0
+build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
 build_property.MSBuildProjectDirectory = c:\Users\LENOVO\OneDrive\Documents\GitHub\TOVO
@@ -36,8 +36,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FuZGlkYXRcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Embauchers/liste_embauchers.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1iYXVjaGVyc1xsaXN0ZV9lbWJhdWNoZXJzLmNzaHRtbA==
+[c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Embauchers/Liste_embauchers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1iYXVjaGVyc1xMaXN0ZV9lbWJhdWNoZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Employe/accueilemp.cshtml]
@@ -52,20 +52,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZVxpbnNlcnRfZW1wbG95ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Fiche/fiche_de_l_employe.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmljaGVcZmljaGVfZGVfbF9lbXBsb3llLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Fiche/fiche_de_paie.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmljaGVcZmljaGVfZGVfcGFpZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Question/question.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25ccXVlc3Rpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/LENOVO/OneDrive/Documents/GitHub/TOVO/Views/Service/liste.cshtml]

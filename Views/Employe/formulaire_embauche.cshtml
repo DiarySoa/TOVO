@@ -1,3 +1,4 @@
+@model List<String>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -82,11 +83,21 @@
         </div><br>
         <label for="">Nom_poste</label>
         <div id="inputQuestion">
-            <input type="text" name="poste" id="">
+            @* <input type="text" name="poste" id=""> *@
+            <select name="poste">
+                @foreach (var service in Model)
+                {
+                    <option>@service</option>
+                }
+            </select>
         </div><br>
-        <label for="">Numero_cnaps</label>
+        <label for="">Numero employe</label>
         <div id="inputQuestion">
-            <input type="text" name="numero_cnaps" id="">
+            <input type="text" name="numero_employe" id="">
+        </div><br>
+        <label for="">Salaire</label>
+        <div id="inputQuestion">
+            <input type="text" name="salaire" id="">
         </div><br>
         <button type="submit" value="Valider">valider</button>
     </form><br><br><br>

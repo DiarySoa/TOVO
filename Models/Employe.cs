@@ -29,14 +29,14 @@ public class Employe
         }
     }
 
-    public void Insert_embauche(int id_emp, String nom_poste, String numero_asa)
+    public void Insert_embauche(int id_emp, String nom_poste, String numero_asa, double salaire)
     {
 
         using (NpgsqlConnection connection = Connect.GetSqlConnection())
         {
             connection.Open();
 
-            string query = "INSERT INTO embauche VALUES( default ," + id_emp + ",'"+ nom_poste +"', CURRENT_DATE,'" + numero_asa + "')";
+            string query = "INSERT INTO embauche VALUES( default ," + id_emp + ",'"+ nom_poste +"', CURRENT_DATE,'" + numero_asa + "', "+ salaire +")";
 
             using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
             {

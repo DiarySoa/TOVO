@@ -70,7 +70,8 @@
                 <th style="width: 200px;">Date de naissance</th>
                 <th style="width: 200px;">Genre</th>
                 <th style="width: 200px;">Date d'embauche</th>
-                <th style="width: 200px;">Numero Cnaps</th>
+                <th style="width: 200px;">Numero Employe</th>
+                <th style="width: 200px;">Salaire</th>
 
             </tr>
             @foreach (var embauchers in Model){
@@ -80,7 +81,9 @@
                 <td>@embauchers.date_de_naissance</td>
                 <td>@embauchers.genre</td>
                 <td>@embauchers.date_embauche</td>
-                <td>@embauchers.numero_cnaps</td>
+                <td>@embauchers.numero_employe</td>
+                <td>@embauchers.salaire</td>
+
             </tr>
             }
            
