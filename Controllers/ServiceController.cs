@@ -12,8 +12,7 @@ public class ServiceController : Controller
         return View("liste", data);
     }
 
-    public IActionResult renvoie(String nom){
-        // String data = nom;
+    public IActionResult renvoie(int nom){
         return RedirectToAction("avec_poste","Service_Poste", new{nom});
     }
 

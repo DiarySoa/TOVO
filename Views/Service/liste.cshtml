@@ -66,7 +66,7 @@
         <div id="inputQuestion">
             <select name="nom">
                 @foreach (var service in Model){
-                    <option>@service.nom_service</option>
+                    <option value="@service.id">@service.nom_service</option>
                 }
             </select>
         </div>

@@ -69,7 +69,6 @@ namespace TOVO.Models
 
 
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////
         public int GetIdService( String nom){
             int idcf = 0;
             using NpgsqlConnection connection = Connect.GetSqlConnection();
@@ -156,12 +155,11 @@ namespace TOVO.Models
 
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////
 
-        public void InsertSP(String nom_service, String nom_poste, double valeur, String diplome, String sexe, String age_d, String age_f, String lieu)
+        public void InsertSP(int nom_service, int nom_poste, double valeur, String diplome, String sexe, String age_d, String age_f, String lieu)
         {
-            int id_service = GetIdService(nom_service);
-            int id_poste = GetIdPoste(nom_poste);
+            int id_service = nom_service;
+            int id_poste = nom_poste;
             
             using (NpgsqlConnection connection = Connect.GetSqlConnection())
             {

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using TOVO.Models;
 using System;
@@ -57,9 +58,7 @@ public class CandidatController : Controller
                 {
                     diplome.CopyTo(stream);
                 }
-
-                // Le fichier a été téléchargé avec succès
-                return RedirectToAction("Import");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -77,11 +76,12 @@ public class CandidatController : Controller
         return View();
     }
 
-    public IActionResult liste_candidat(String id_annonce)
+    public IActionResult liste_candidat(int id_annonce)
     {
         Candidat c = new Candidat();
-        ViewBag.Id_annonce = id_annonce;
-        List<Candidat> liste = c.getAllCandidatSelectionne(int.Parse(ViewBag.Id_annonce));
+        ViewData.Add("Id_annonce", id_annonce);
+        List<Candidat> liste = c.getAllCandidatSelectionne(id_annonce);
+        Console.WriteLine(liste.Count());
         return View("liste_candidat", liste);
     }
 

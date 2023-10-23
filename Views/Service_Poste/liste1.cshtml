@@ -1,4 +1,4 @@
-@model List<String>
+@model List<Post>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -72,9 +72,9 @@
         <label for="">Postes</label>
             <div id="inputQuestion">
                 <select name="nom_poste">
-                    @foreach (var nom in Model)
+                    @foreach (var post in Model)
                     {
-                    <option>@nom</option>
+                        <option value="@post.id">@post.nom_poste</option>
                     }
                 </select>
             </div><br>
